@@ -79,6 +79,14 @@ public class StudentService {
 
     }
 
+    public void deleteStudent(String id){
+       StudentEntity studentEntity = studentRepository.findById(id).orElseThrow();
+
+
+        studentRepository.delete(studentEntity);
+
+    }
+
 
 
 
