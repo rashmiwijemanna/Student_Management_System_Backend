@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +27,23 @@ public class StudentService {
 
         );
         studentRepository.save(studentEntity);
+    }
+
+    public List<Student> getAllStudentDetails(){
+        List<StudentEntity> all = studentRepository.findAll();
+        List<Student> students=new ArrayList<>();
+
+        for (StudentEntity studentEntity:all){
+            students.add(new Student(
+                    studentEntity.getId(),
+                    studentEntity.getName(),
+                    studentEntity.getEmail(),
+                    studentEntity.getAge(),
+                    studentEntity.getPhoneNumber()
+            ));
+        }
+        return students;
+
     }
 
 
