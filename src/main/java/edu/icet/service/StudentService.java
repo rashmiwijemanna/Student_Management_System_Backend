@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -44,6 +45,17 @@ public class StudentService {
         }
         return students;
 
+    }
+    public Student getById(String id){
+        Optional<StudentEntity> byId = studentRepository.findById(String.valueOf(id));
+        StudentEntity studentEntity=byId.orElseThrow();
+        return new Student(
+                studentEntity.getId(),
+                studentEntity.getName(),
+                studentEntity.getEmail(),
+                studentEntity.getAge(),
+                studentEntity.getPhoneNumber()
+        );
     }
 
 
