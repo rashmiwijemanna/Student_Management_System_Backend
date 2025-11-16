@@ -4,7 +4,6 @@ import edu.icet.model.dto.Student;
 import edu.icet.model.entity.StudentEntity;
 import edu.icet.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,6 +55,28 @@ public class StudentService {
                 studentEntity.getAge(),
                 studentEntity.getPhoneNumber()
         );
+    }
+
+    public Student updateStudent(String id, StudentEntity student){
+        Optional<StudentEntity> byId = studentRepository.findById(id);
+        StudentEntity studentEntity=byId.orElseThrow();
+
+                
+                studentEntity.setName(student.getName());
+                studentEntity.setEmail(student.getEmail());
+                studentEntity.setAge(student.getAge());
+                studentEntity.setPhoneNumber(student.getPhoneNumber());
+
+                    StudentEntity updated= studentRepository.save(studentEntity);
+
+                    return new Student(
+                            updated.getId(),
+                            updated.getName(),
+                            updated.getEmail(),
+                            updated.getAge(),
+                            updated.getPhoneNumber()
+                    );
+
     }
 
 

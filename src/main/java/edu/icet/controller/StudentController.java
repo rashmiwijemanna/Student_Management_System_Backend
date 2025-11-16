@@ -2,6 +2,7 @@ package edu.icet.controller;
 
 
 import edu.icet.model.dto.Student;
+import edu.icet.model.entity.StudentEntity;
 import edu.icet.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,12 @@ public class StudentController {
    @GetMapping("/{id}")
     public Student getById(@PathVariable String id){
         return studentService.getById(id);
+    }
+
+    @PutMapping("/{updateId}")
+    public Student updateStudent(@PathVariable String updateId, @RequestBody StudentEntity student){
+        return studentService.updateStudent(updateId, student);
+
     }
 
 
